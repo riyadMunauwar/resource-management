@@ -12,6 +12,7 @@ use Filament\Tables;
 use Filament\Tables\Table;
 use Illuminate\Database\Eloquent\Builder;
 use Illuminate\Database\Eloquent\SoftDeletingScope;
+use Filament\Tables\Enums\FiltersLayout;
 
 class NoticeResource extends Resource
 {
@@ -41,11 +42,13 @@ class NoticeResource extends Resource
     public static function table(Table $table): Table
     {
         return $table
-            ->modifyQueryUsing(fn (Builder $query) => $query->where('user_id', auth()->id())->orWhere('is_global', true))
+            ->modifyQueryUsing(fn (Builder $query) => $query->where('user_id', auth()->id())->orWhere('is_global', true)->latest())
             ->columns(\App\Filament\Admin\Tables\NoticeTable::make())
-            ->filters(\App\Filament\Admin\Filters\CommonFilter::make())
+            ->filters(\App\Filament\Admin\Filters\CommonFilter::make(), layout: FiltersLayout::AboveContent)
             ->actions(\App\Filament\Admin\Actions\CommonAction::make())
-            ->bulkActions(\App\Filament\Admin\Actions\CommonBulkAction::make());
+            ->bulkActions(\App\Filament\Admin\Actions\CommonBulkAction::make())
+            ->contentGrid(['sm' => 2])
+            ->reorderable('position');
     }
 
     public static function getRelations(): array

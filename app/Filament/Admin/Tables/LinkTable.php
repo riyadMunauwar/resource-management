@@ -17,6 +17,12 @@ class LinkTable
                 ->toggleable()
                 ->sortable(),
 
+            Tables\Columns\TextColumn::make('link')
+                ->searchable()
+                ->toggleable()
+                ->sortable()
+                ->copyable(),
+
         ];
     }
 }

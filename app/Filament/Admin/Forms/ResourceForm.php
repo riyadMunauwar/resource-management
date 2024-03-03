@@ -25,7 +25,7 @@ class ResourceForm
                 ->searchable()
                 ->preload()
                 ->placeholder('Search category')
-                ->nullable()
+                ->required()
                 ->native(false),
 
             Forms\Components\TextInput::make('title')

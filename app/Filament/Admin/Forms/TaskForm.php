@@ -25,7 +25,14 @@ class TaskForm
                 ->searchable()
                 ->preload()
                 ->placeholder('Search category')
-                ->nullable()
+                ->required()
+                ->native(false),
+
+
+            Forms\Components\Select::make('status')
+                ->options(\App\Enums\TaskStatus::class)
+                ->required()
+                ->default(\App\Enums\TaskStatus::Pending->value)
                 ->native(false),
 
             Forms\Components\TextInput::make('name')
