@@ -47,7 +47,7 @@ class ResourceResource extends Resource
             ->filters(\App\Filament\Admin\Filters\CommonFilter::make(), layout: FiltersLayout::AboveContent)
             ->actions(\App\Filament\Admin\Actions\CommonAction::make())
             ->bulkActions(\App\Filament\Admin\Actions\CommonBulkAction::make())
-            ->contentGrid(['sm' => 2])
+            ->contentGrid(['sm' => 1])
             ->reorderable('position');
     }
 
