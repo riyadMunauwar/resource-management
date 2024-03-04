@@ -19,7 +19,8 @@ class TaskForm
 
             Forms\Components\DateTimePicker::make('finished_at')
                 ->native(false)
-                ->nullable(),
+                ->nullable()
+                ->default(now()),
 
             Forms\Components\Select::make('category_id')
                 ->relationship(
