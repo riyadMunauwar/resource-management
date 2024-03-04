@@ -17,7 +17,7 @@ class TaskForm
             Forms\Components\Checkbox::make('is_global')
                 ->default(false),
 
-            DateTimePicker::make('published_at')
+            Forms\Components\DateTimePicker::make('published_at')
                 ->native(false)
                 ->nullable(),
 
