@@ -14,6 +14,7 @@ use Illuminate\Database\Eloquent\Builder;
 use Illuminate\Database\Eloquent\SoftDeletingScope;
 use Filament\Tables\Enums\FiltersLayout;
 
+
 class LinkResource extends Resource
 {
     protected static ?string $model = Link::class;
@@ -42,9 +43,8 @@ class LinkResource extends Resource
     public static function table(Table $table): Table
     {
         return $table
-            ->modifyQueryUsing(fn (Builder $query) => $query->where('user_id', auth()->id())->orWhere('is_global', true)->latest())
             ->columns(\App\Filament\Admin\Tables\LinkTable::make())
-            ->filters(\App\Filament\Admin\Filters\CommonFilter::make(), layout: FiltersLayout::AboveContent)
+            ->filters(\App\Filament\Admin\Filters\CommonFilter::make(\App\Enums\CategoryType::Link->value), layout: FiltersLayout::AboveContent)
             ->actions(\App\Filament\Admin\Actions\CommonAction::make())
             ->bulkActions(\App\Filament\Admin\Actions\CommonBulkAction::make());
     }

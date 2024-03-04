@@ -4,10 +4,19 @@ namespace App\Models;
 
 use Illuminate\Database\Eloquent\Factories\HasFactory;
 use Illuminate\Database\Eloquent\Model;
+use App\Models\User;
+use Illuminate\Database\Eloquent\Builder;
 
 class Task extends Model
 {
     use HasFactory;
+
+    protected static function booted()
+    {
+        static::addGlobalScope('tenant', function (Builder $builder) {
+            $builder->where('user_id', auth()->id())->orWhere('is_global', true)->latest();
+        });
+    }
 
     public function user()
     {
@@ -17,5 +26,10 @@ class Task extends Model
     public function category()
     {
         return $this->belongsTo(Category::class);
+    }
+
+    public function assignTo()
+    {
+        return $this->belongsTo(User::class, 'assign_to_id');
     }
 }

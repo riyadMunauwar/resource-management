@@ -15,6 +15,11 @@ class CategoryForm
             Forms\Components\Checkbox::make('is_global')
                 ->default(false),
 
+            Forms\Components\Select::make('type')
+                ->options(\App\Enums\CategoryType::class)
+                ->searchable()
+                ->required(),
+
             Forms\Components\TextInput::make('name')
                 ->maxLength(1024)
                 ->required(),

@@ -42,9 +42,8 @@ class TaskResource extends Resource
     public static function table(Table $table): Table
     {
         return $table
-            ->modifyQueryUsing(fn (Builder $query) => $query->where('user_id', auth()->id())->orWhere('is_global', true)->latest())
             ->columns(\App\Filament\Admin\Tables\TaskTable::make())
-            ->filters(\App\Filament\Admin\Filters\CommonFilter::make(), layout: FiltersLayout::AboveContent)
+            ->filters(\App\Filament\Admin\Filters\CommonFilter::make(\App\Enums\CategoryType::Task->value), layout: FiltersLayout::AboveContent)
             ->actions(\App\Filament\Admin\Actions\CommonAction::make())
             ->bulkActions(\App\Filament\Admin\Actions\CommonBulkAction::make())
             ->reorderable('position');

@@ -17,6 +17,12 @@ class ResourceTable
                 ->columns(1)
                 ->schema([
 
+                    Tables\Columns\IconColumn::make('is_global')
+                        ->icon(fn (bool $state): string => match ($state) {
+                            true => 'heroicon-o-users',
+                            false => 'heroicon-o-lock-closed',
+                        }),
+
                     Tables\Columns\TextColumn::make('title')
                         ->searchable()
                         ->toggleable()
@@ -25,7 +31,11 @@ class ResourceTable
 
                     Tables\Columns\TextColumn::make('content')
                         ->html()
+                        ->limit(300)
                         ->copyable(),
+
+                    Tables\Columns\TextColumn::make('category.name')
+                        ->badge(),
                 ]),
         ];
     }

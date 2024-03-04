@@ -13,20 +13,32 @@ class TaskTable
     public static function make() : array
     {
         return [
-            Tables\Columns\Layout\Grid::make()
-                ->columns(1)
-                ->schema([
+                Tables\Columns\TextColumn::make('name')
+                    ->searchable()
+                    ->toggleable()
+                    ->sortable()
+                    ->weight(FontWeight::Bold),
 
-                    Tables\Columns\TextColumn::make('name')
-                        ->searchable()
-                        ->toggleable()
-                        ->sortable()
-                        ->weight(FontWeight::Bold),
+                    Tables\Columns\TextColumn::make('user.name')
+                        ->label('Created by'),
 
-                    Tables\Columns\TextColumn::make('description')
-                        ->html()
-                        ->copyable(),
-                ]),
+                    Tables\Columns\TextColumn::make('assignTo.name')
+                        ->label('Assign to'),
+
+                    Tables\Columns\TextColumn::make('status')
+                        ->badge(),
+
+                    Tables\Columns\TextColumn::make('category.name')
+                        ->badge(),
+
+                    Tables\Columns\TextColumn::make('finished_at')
+                        ->dateTime(),
+
+                    Tables\Columns\TextColumn::make('created_at')
+                        ->dateTime(),
+
+
+                Tables\Columns\CheckboxColumn::make('is_global'),
         ];
     }
 }

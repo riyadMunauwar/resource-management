@@ -13,6 +13,7 @@ return new class extends Migration
     {
         Schema::create('categories', function (Blueprint $table) {
             $table->id();
+            $table->string('type');
             $table->string('name', 1024);
             $table->boolean('is_global')->default(false);
             $table->foreignId('user_id')->nullable()->constrained()->cascadeOnDelete();
