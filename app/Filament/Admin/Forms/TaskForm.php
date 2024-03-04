@@ -17,6 +17,10 @@ class TaskForm
             Forms\Components\Checkbox::make('is_global')
                 ->default(false),
 
+            DateTimePicker::make('published_at')
+                ->native(false)
+                ->nullable(),
+
             Forms\Components\Select::make('category_id')
                 ->relationship(
                     name: 'category',
