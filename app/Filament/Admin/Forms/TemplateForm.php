@@ -22,7 +22,7 @@ class TemplateForm
                 ->relationship(
                     name: 'category',
                     titleAttribute: 'name',
-                    modifyQueryUsing: fn (Builder $query) => $query->where('type', \App\Enums\CategoryType::Link->value),
+                    modifyQueryUsing: fn (Builder $query) => $query->where('type', \App\Enums\CategoryType::Template->value),
                 )
                 ->createOptionForm(\App\Filament\Admin\Forms\CategoryForm::make())
                 ->label('Category')
